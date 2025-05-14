@@ -27,17 +27,17 @@
     Панель адміністратора (Orchid): http://localhost/admin
 
     Корисні команди:
-    # Зайти в контейнер
+    Зайти в контейнер
     ./vendor/bin/sail shell
     або
     sail shell
 
-    # Очистити кеші
+    Очистити кеші
     ./vendor/bin/sail artisan optimize:clear
     або
     sail artisan optimize:clear
 
-    # Список доступних команд Sail
+    Список доступних команд Sail
     ./vendor/bin/sail
     або
     sail

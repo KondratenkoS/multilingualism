@@ -40,5 +40,5 @@
     Список доступних команд Sail
     ./vendor/bin/sail
     або
-    sail
+    sail 
 

@@ -20,6 +20,11 @@ return new class extends Migration
             $table->json('title');
             $table->json('body');
 
+            // зв’язок з таблицею posts
+            $table->foreignId('post_id')
+                ->constrained('posts')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

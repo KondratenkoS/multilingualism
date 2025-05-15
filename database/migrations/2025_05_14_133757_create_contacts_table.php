@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_for_call');
             $table->string('phone_for_chat');
+            // можливість додавати логотипи (orchid)
+            $table->foreignId('logo_id')->nullable()->constrained('attachments')->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -13,17 +13,15 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title_en');
-            $table->string('title_heb');
-            $table->text('body_en');
-            $table->text('body_heb');
-            $table->string('link')->nullable()->unique();
-            $table->string('icon')->nullable();
-            $table->unsignedBigInteger('parent_id')->nullable();
+            // багатомовні поля - Spatie
+            $table->json('title');
+            $table->json('body');
 
-            // self-join constraint
-            $table->foreign('parent_id')->references('id')->on('posts')->onDelete('set null');
-
+            // можливість прив'язати дочірні пости до батьківського посту
+            $table->foreignId('parent_id')
+                ->nullable()
+                ->constrained('posts')
+                ->nullOnDelete();
             $table->timestamps();
         });
     }

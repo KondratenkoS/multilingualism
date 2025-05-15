@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "987f529c4d91f4be820f92f87e1c64e3",
+    "content-hash": "4810fe58e2c93dfb0c7c823f26a399e4",
     "packages": [
         {
             "name": "brick/math",
@@ -1137,16 +1137,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.13.0",
+            "version": "v12.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "52b588bcd8efc6d01bc1493d2d67848f8065f269"
+                "reference": "84b142958d1638a7e89de94ce75c2821c601d3d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/52b588bcd8efc6d01bc1493d2d67848f8065f269",
-                "reference": "52b588bcd8efc6d01bc1493d2d67848f8065f269",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/84b142958d1638a7e89de94ce75c2821c601d3d7",
+                "reference": "84b142958d1638a7e89de94ce75c2821c601d3d7",
                 "shasum": ""
             },
             "require": {
@@ -1348,7 +1348,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-05-07T17:29:01+00:00"
+            "time": "2025-05-13T17:50:51+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1411,16 +1411,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.42.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "2edaaf77f3c07a4099965bb3d7dfee16e801c0f6"
+                "reference": "71a509b14b2621ce58574274a74290f933c687f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/2edaaf77f3c07a4099965bb3d7dfee16e801c0f6",
-                "reference": "2edaaf77f3c07a4099965bb3d7dfee16e801c0f6",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/71a509b14b2621ce58574274a74290f933c687f7",
+                "reference": "71a509b14b2621ce58574274a74290f933c687f7",
                 "shasum": ""
             },
             "require": {
@@ -1470,20 +1470,20 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2025-04-29T14:26:46+00:00"
+            "time": "2025-05-13T13:34:34+00:00"
         },
         {
             "name": "laravel/scout",
-            "version": "v10.14.1",
+            "version": "v10.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "6ae3ec83ceacb554f395df9fe15318a14b79bb39"
+                "reference": "102fe09ae1c045c6f9cf1b3a2234e1fadb2198f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/6ae3ec83ceacb554f395df9fe15318a14b79bb39",
-                "reference": "6ae3ec83ceacb554f395df9fe15318a14b79bb39",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/102fe09ae1c045c6f9cf1b3a2234e1fadb2198f2",
+                "reference": "102fe09ae1c045c6f9cf1b3a2234e1fadb2198f2",
                 "shasum": ""
             },
             "require": {
@@ -1551,7 +1551,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2025-04-01T14:58:03+00:00"
+            "time": "2025-05-13T13:34:05+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -3681,6 +3681,150 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.92.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/d20b1969f836d210459b78683d85c9cd5c5f508c",
+                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.23|^2.1|^3.1",
+                "phpunit/php-code-coverage": "^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
+                "spatie/pest-plugin-test-time": "^1.1|^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-11T15:27:14+00:00"
+        },
+        {
+            "name": "spatie/laravel-translatable",
+            "version": "6.11.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-translatable.git",
+                "reference": "032d85b28de315310dab2048b857016f1194f68b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/032d85b28de315310dab2048b857016f1194f68b",
+                "reference": "032d85b28de315310dab2048b857016f1194f68b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.64",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.20|^2.0|^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "aliases": {
+                    "Translatable": "Spatie\\Translatable\\Facades\\Translatable"
+                },
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Translatable\\TranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Translatable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A trait to make an Eloquent model hold translations",
+            "homepage": "https://github.com/spatie/laravel-translatable",
+            "keywords": [
+                "eloquent",
+                "i8n",
+                "laravel-translatable",
+                "model",
+                "multilingual",
+                "spatie",
+                "translate"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-translatable/issues",
+                "source": "https://github.com/spatie/laravel-translatable/tree/6.11.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-20T15:51:22+00:00"
         },
         {
             "name": "symfony/clock",

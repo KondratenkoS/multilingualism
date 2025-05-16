@@ -79,7 +79,7 @@ class ContactResource extends Resource
             TD::make('phone_for_call'),
             TD::make('phone_for_chat'),
 
-            TD::make('logo', 'Логотипи')->render(function (Contact $contact) {
+            TD::make('logo', 'Logo')->render(function (Contact $contact) {
                 return $contact->attachment->map(function ($attachment) {
                     return "<img src='{$attachment->url()}' width='50' style='margin-right: 5px;' alt='logo'>";
                 })->implode(' ');
@@ -116,9 +116,9 @@ class ContactResource extends Resource
             Sight::make('phone_for_call', 'Phone for calls'),
             Sight::make('phone_for_chat', 'Phone for chats'),
 
-            Sight::make('logo', 'Логотипи')->render(function (Contact $contact) {
+            Sight::make('logo', 'Logo')->render(function (Contact $contact) {
                 if ($contact->attachment->isEmpty()) {
-                    return 'Логотипів не знайдено';
+                    return 'Image not found';
                 }
 
                 return $contact->attachment->map(function ($attachment) {

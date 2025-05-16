@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('post_contents', function (Blueprint $table) {
             $table->id();
 
-            $table->string('slug');
+            $table->string('slug')->unique();
 
             // багатомовні поля - Spatie
             $table->json('title');

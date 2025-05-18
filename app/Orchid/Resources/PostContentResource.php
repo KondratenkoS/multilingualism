@@ -4,9 +4,12 @@ namespace App\Orchid\Resources;
 
 use App\Models\Post;
 use App\Models\PostContent;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
@@ -30,7 +33,7 @@ class PostContentResource extends Resource
             Select::make('post_id')
                 ->options(
                     Post::all()->mapWithKeys(fn($post) => [
-                        $post->id => $post->getTranslation('title', 'en') . ' | ' . $post->getTranslation('title', 'he')
+                        $post->id => $post->title_en . ' | ' . $post->title_he
                     ])
                 )
                 ->title('Select main post in english')
@@ -42,15 +45,31 @@ class PostContentResource extends Resource
             Input::make('title_he')
                 ->title('Title for main page in Hebrew')
                 ->required(),
-            Input::make('body_en')
+            TextArea::make('body_en')
                 ->title('Content for main page in English')
                 ->required(),
-            Input::make('body_he')
+            TextArea::make('body_he')
                 ->title('Content for main page in Hebrew')
                 ->required(),
             Input::make('slug')
                 ->title('Slug')
                 ->required(),
+        ];
+    }
+
+    public function rules(Model $model): array
+    {
+        return [
+            'title_en' => ['required', 'string', 'max:255'],
+            'title_he' => ['required', 'string', 'max:255'],
+            'body_en' => ['required', 'string', 'max:5000'],
+            'body_he' => ['required', 'string', 'max:5000'],
+            'slug' => ['required',
+                'string',
+                'max:255',
+                'alpha_dash',
+                // check for uniqueness and ignore the field if it has not changed
+                Rule::unique(self::$model, 'slug')->ignore($model)],
         ];
     }
 
@@ -62,16 +81,16 @@ class PostContentResource extends Resource
     public function columns(): array
     {
         return [
-            TD::make('post.title', 'Main Post in en')->render(function ($content) {
+            TD::make('post.title_en', 'Main Post in en')->render(function ($content) {
                 return optional($content->post)->getTranslation('title', 'en');
             }),
-            TD::make('post.title', 'Main Post in he')->render(function ($content) {
+            TD::make('post.title_he', 'Main Post in he')->render(function ($content) {
                 return optional($content->post)->getTranslation('title', 'he');
             }),
-            TD::make('title.en', 'Menu item in English')->render(fn($menu) => $menu->getTranslation('title', 'en')),
-            TD::make('title.he', 'Menu item in Hebrew')->render(fn($menu) => $menu->getTranslation('title', 'he')),
-            TD::make('body.en', 'Menu item in English')->render(fn($menu) => $menu->getTranslation('title', 'en')),
-            TD::make('body.he', 'Menu item in Hebrew')->render(fn($menu) => $menu->getTranslation('title', 'he')),
+            TD::make('title_en', 'Side title in English'),
+            TD::make('title_he', 'Side title in Hebrew'),
+            TD::make('body_en', 'Side content in English'),
+            TD::make('body_he', 'Side content in Hebrew'),
             TD::make('slug'),
         ];
     }
@@ -84,10 +103,14 @@ class PostContentResource extends Resource
     public function legend(): array
     {
         return [
-            Sight::make('title', 'Post name in english')->render(fn($menu) => $menu->getTranslation('title', 'en')),
-            Sight::make('title', 'Post name in hebrew')->render(fn($menu) => $menu->getTranslation('title', 'he')),
-            Sight::make('body', 'Post content in english')->render(fn($menu) => $menu->getTranslation('title', 'en')),
-            Sight::make('body', 'Post content in hebrew')->render(fn($menu) => $menu->getTranslation('title', 'he')),
+            Sight::make('post_id', 'Main Post')->render(function ($content) {
+                $post = $content->post;
+                return $post ? "{$post->title_en} | {$post->title_he}" : '';
+            }),
+            Sight::make('title_en', 'Post name in english'),
+            Sight::make('title_he', 'Post name in hebrew'),
+            Sight::make('body_en', 'Post content in english'),
+            Sight::make('body_he', 'Post content in hebrew'),
             Sight::make('slug'),
         ];
     }

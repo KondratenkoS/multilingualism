@@ -39,15 +39,33 @@ class ContactResource extends Resource
                 ->required(),
             Input::make('phone_for_call')
                 ->title('Phone for calls')
+                ->mask([
+                    'mask' => '+99 999 999 99 99',
+                ])
                 ->required(),
             Input::make('phone_for_chat')
                 ->title('Phone for chats')
+                ->mask([
+                    'mask' => '+99 999 999 99 99',
+                ])
                 ->required(),
 
             Upload::make('attachment')
                 ->title('Logo download')
                 ->acceptedFiles('image/*')
                 ->maxFiles(3),
+        ];
+    }
+
+    public function rules(Model $model): array
+    {
+        return [
+            'email' => ['required', 'email', 'max:255'],
+            'phone_for_call' => ['required', 'string', 'max:20'],
+            'phone_for_chat' => ['required', 'string', 'max:20'],
+            'copyright_en' => ['required', 'string', 'max:255'],
+            'copyright_he' => ['required', 'string', 'max:255'],
+            'attachment' => ['required', 'array', 'max:3'],
         ];
     }
 
@@ -73,31 +91,17 @@ class ContactResource extends Resource
     public function columns(): array
     {
         return [
-            TD::make('copyright.en'),
-            TD::make('copyright.he'),
-            TD::make('email'),
-            TD::make('phone_for_call'),
-            TD::make('phone_for_chat'),
+            TD::make('copyright.en', 'Copyright line in English'),
+            TD::make('copyright.he', 'Copyright line in Hebrew'),
+            TD::make('email', 'Email'),
+            TD::make('phone_for_call', 'Phone for calls'),
+            TD::make('phone_for_chat', 'Phone for chats'),
 
             TD::make('logo', 'Logo')->render(function (Contact $contact) {
                 return $contact->attachment->map(function ($attachment) {
                     return "<img src='{$attachment->url()}' width='50' style='margin-right: 5px;' alt='logo'>";
                 })->implode(' ');
             })->width('150px'),
-
-
-//
-            TD::make('debug', 'Debug')->render(function (Contact $contact) {
-                $attachment = $contact->attachments()->first();
-                if ($attachment) {
-                    return $attachment->url();
-                }
-                return 'No attachment found';
-            }),
-
-
-
-
         ];
     }
 
@@ -110,8 +114,8 @@ class ContactResource extends Resource
     public function legend(): array
     {
         return [
-            Sight::make('copyright.en', 'Copyright in English')->render(fn($menu) => $menu->getTranslation('copyright', 'en')),
-            Sight::make('copyright.he', 'Copyright in Hebrew')->render(fn($menu) => $menu->getTranslation('copyright', 'he')),
+            Sight::make('copyright.en', 'Copyright in English'),
+            Sight::make('copyright.he', 'Copyright in Hebrew'),
             Sight::make('email', 'Email'),
             Sight::make('phone_for_call', 'Phone for calls'),
             Sight::make('phone_for_chat', 'Phone for chats'),

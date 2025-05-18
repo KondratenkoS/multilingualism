@@ -14,7 +14,7 @@ class PostContent extends Model
     use HasTranslations, AsSource, Filterable, Attachable;
 
     protected $table = 'post_contents';
-    protected $fillable = ['title', 'slug', 'body', 'post_id'];
+    protected $fillable = ['title', 'slug', 'body'];
     public $translatable = ['title', 'body'];
 
     public function post(): BelongsTo

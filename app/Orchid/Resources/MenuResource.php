@@ -7,6 +7,8 @@ use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
+use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Model;
 
 class MenuResource extends Resource
 {
@@ -40,6 +42,20 @@ class MenuResource extends Resource
         ];
     }
 
+    public function rules(Model $model): array
+    {
+        return [
+            'title_en' => ['required', 'string', 'max:255'],
+            'title_he' => ['required', 'string', 'max:255'],
+            'slug' => ['required',
+                'string',
+                'max:255',
+                'alpha_dash',
+                // check for uniqueness and ignore the field if it has not changed
+                Rule::unique(self::$model, 'slug')->ignore($model)],
+        ];
+    }
+
     /**
      * Get the columns displayed by the resource.
      *
@@ -48,8 +64,8 @@ class MenuResource extends Resource
     public function columns(): array
     {
         return [
-            TD::make('title', 'Menu item in English')->render(fn($menu) => $menu->getTranslation('title', 'en')),
-            TD::make('title', 'Menu item in Hebrew')->render(fn($menu) => $menu->getTranslation('title', 'he')),
+            TD::make('title_en', 'Menu item in English'),
+            TD::make('title_he', 'Menu item in Hebrew'),
             TD::make('slug'),
         ];
     }
@@ -62,8 +78,8 @@ class MenuResource extends Resource
     public function legend(): array
     {
         return [
-            Sight::make('title', 'Menu item name in English')->render(fn($menu) => $menu->getTranslation('title', 'en')),
-            Sight::make('title', 'Menu item name in Hebrew')->render(fn($menu) => $menu->getTranslation('title', 'he')),
+            Sight::make('title_en', 'Menu item name in English'),
+            Sight::make('title_he', 'Menu item name in Hebrew'),
             Sight::make('slug'),
         ];
     }

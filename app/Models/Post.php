@@ -44,12 +44,12 @@ class Post extends Model
 
     public function getBodyEnAttribute(): ?string
     {
-        return $this->getTranslation('body', 'he');
+        return $this->getTranslation('body', 'en');
     }
 
     public function setBodyEnAttribute(string $value): void
     {
-        $this->setTranslation('body', 'he', $value);
+        $this->setTranslation('body', 'en', $value);
     }
 
     public function getBodyHeAttribute(): ?string

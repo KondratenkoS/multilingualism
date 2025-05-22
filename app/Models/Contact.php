@@ -10,7 +10,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Contact extends Model
 {
-    use HasTranslations, AsSource, Filterable, Attachable;
+    use HasTranslations, AsSource, Attachable, Filterable;
 
     protected $table = 'contacts';
     protected $fillable = ['copyright', 'email', 'phone_for_call', 'phone_for_chat'];

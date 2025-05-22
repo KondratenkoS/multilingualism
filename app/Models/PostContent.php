@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Spatie\Translatable\HasTranslations;
 
 class PostContent extends Model
 {
-    use HasTranslations, AsSource, Filterable, Attachable;
+    use HasTranslations, AsSource, Filterable;
 
     protected $table = 'post_contents';
     protected $fillable = ['title', 'slug', 'body'];

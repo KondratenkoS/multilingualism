@@ -36,6 +36,11 @@ use Tabuna\Breadcrumbs\Trail;
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 
+Route::screen('posts', \App\Orchid\Screens\Post\PostListScreen::class)->name('platform.posts.list');
+Route::screen('post_contents', \App\Orchid\Screens\Post\PostContentListScreen::class)->name('platform.post_contents.list');
+Route::screen('menus', \App\Orchid\Screens\Post\MenuListScreen::class)->name('platform.menus.list');
+Route::screen('contacts', \App\Orchid\Screens\Post\ContactsListScreen::class)->name('platform.contacts.list');
+
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
     ->name('platform.profile')

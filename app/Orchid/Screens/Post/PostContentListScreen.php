@@ -75,8 +75,8 @@ class PostContentListScreen extends Screen
                 Select::make('lang')
                     ->title('Language')
                     ->options([
-                        'uk' => 'Українська',
                         'en' => 'English',
+                        'uk' => 'Українська',
                         'fr' => 'French',
                         'sp' => 'Spanish',
                     ]),
@@ -90,6 +90,18 @@ class PostContentListScreen extends Screen
 
                 Input::make('slug')
                     ->title('Slug')
+                    ->type('text'),
+
+                Input::make('meta_title')
+                    ->title('Meta tag for "title"')
+                    ->type('text'),
+
+                Input::make('meta_description')
+                    ->title('Meta tag for "description"')
+                    ->type('text'),
+
+                Input::make('meta_keywords')
+                    ->title('Meta tag for "keywords"')
                     ->type('text'),
             ]))->title('Create page')->applyButton('Create'),
 
@@ -114,6 +126,18 @@ class PostContentListScreen extends Screen
 
                                 Quill::make("postContent.body.$locale")
                                     ->title("Body ($locale)"),
+
+                                Input::make("postContent.meta_title.$locale")
+                                    ->title("Meta tag for title ($locale)")
+                                    ->type('text'),
+
+                                Input::make("postContent.meta_description.$locale")
+                                    ->title("Meta tag for description ($locale)")
+                                    ->type('text'),
+
+                                Input::make("postContent.meta_keywords.$locale")
+                                    ->title("Meta tag for keywords ($locale)")
+                                    ->type('text'),
                             ]),
                         ];
                     })->toArray()
@@ -139,6 +163,9 @@ class PostContentListScreen extends Screen
         foreach (config('app.locales', ['en']) as $locale) {
             $data["postContent.title.$locale"] = $postContent->getTranslation('title', $locale, false);
             $data["postContent.body.$locale"] = $postContent->getTranslation('body', $locale, false);
+            $data["postContent.meta_title.$locale"] = $postContent->getTranslation('meta_title', $locale, false);
+            $data["postContent.meta_description.$locale"] = $postContent->getTranslation('meta_description', $locale, false);
+            $data["postContent.meta_keywords.$locale"] = $postContent->getTranslation('meta_keywords', $locale, false);
         }
 
         return $data;
@@ -161,6 +188,9 @@ class PostContentListScreen extends Screen
 
         $postContent->setTranslations('title', $data['title'] ?? []);
         $postContent->setTranslations('body', $data['body'] ?? []);
+        $postContent->setTranslations('meta_title', $data['meta_title'] ?? []);
+        $postContent->setTranslations('meta_description', $data['meta_description'] ?? []);
+        $postContent->setTranslations('meta_keywords', $data['meta_keywords'] ?? []);
 
         $postContent->save();
     }
@@ -171,6 +201,9 @@ class PostContentListScreen extends Screen
 //        dd($data['body']);
         $postContent->setTranslation('title', $data['lang'], $data['title']);
         $postContent->setTranslation('body', $data['lang'], $data['body']);
+        $postContent->setTranslation('meta_title', $data['lang'], $data['meta_title']);
+        $postContent->setTranslation('meta_description', $data['lang'], $data['meta_description']);
+        $postContent->setTranslation('meta_keywords', $data['lang'], $data['meta_keywords']);
         $postContent->slug = $data['slug'];
         $postContent->post_id = $data['post_id'];
         $postContent->save();

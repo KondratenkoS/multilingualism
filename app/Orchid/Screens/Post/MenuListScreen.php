@@ -66,8 +66,8 @@ class MenuListScreen extends Screen
                 Select::make('lang')
                     ->title('Language')
                     ->options([
-                        'uk' => 'Українська',
                         'en' => 'English',
+                        'uk' => 'Українська',
                         'fr' => 'French',
                         'sp' => 'Spanish',
                     ]),

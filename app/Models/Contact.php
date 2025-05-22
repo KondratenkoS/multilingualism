@@ -13,26 +13,6 @@ class Contact extends Model
     use HasTranslations, AsSource, Attachable, Filterable;
 
     protected $table = 'contacts';
-    protected $fillable = ['copyright', 'email', 'phone_for_call', 'phone_for_chat'];
+    protected $fillable = ['copyright', 'email', 'phone_for_call', 'phone_for_chat', 'gtm_head', 'gtm_body'];
     public $translatable = ['copyright'];
-
-    public function getCopyrightEnAttribute(): ?string
-    {
-        return $this->getTranslation('copyright', 'en');
-    }
-
-    public function setCopyrightEnAttribute(string $value): void
-    {
-        $this->setTranslation('copyright', 'en', $value);
-    }
-
-    public function getCopyrightHeAttribute(): ?string
-    {
-        return $this->getTranslation('copyright', 'he');
-    }
-
-    public function setCopyrightHeAttribute(string $value): void
-    {
-        $this->setTranslation('copyright', 'he', $value);
-    }
 }

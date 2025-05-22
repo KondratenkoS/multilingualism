@@ -3,8 +3,6 @@
 namespace App\Orchid\Screens\Post;
 
 use App\Models\Contact;
-use App\Models\Post;
-use App\Models\PostContent;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
@@ -65,13 +63,12 @@ class ContactsListScreen extends Screen
                     }),
             ]),
 
-
             Layout::modal('createContact', Layout::rows([
                 Select::make('lang')
                     ->title('Language')
                     ->options([
-                        'uk' => 'Українська',
                         'en' => 'English',
+                        'uk' => 'Українська',
                         'fr' => 'French',
                         'sp' => 'Spanish',
                     ]),
@@ -98,6 +95,12 @@ class ContactsListScreen extends Screen
                         'mask' => '+99 999 999 99 99',
                     ]),
 
+                Quill::make('contact.gtm_head')
+                    ->title('GTM Head'),
+
+                Quill::make('contact.gtm_body')
+                    ->title('GTM Body'),
+
                 Upload::make('attachment')
                     ->title('Logo download')
                     ->acceptedFiles('image/*'),
@@ -119,6 +122,12 @@ class ContactsListScreen extends Screen
                         ->mask([
                             'mask' => '+99 999 999 99 99',
                         ]),
+
+                    Quill::make('contact.gtm_head')
+                        ->title('"GTM" Head'),
+                    Quill::make('contact.gtm_body')
+                        ->title('"GTM" Body'),
+
                     Upload::make('attachment')
                         ->title('Logo upload')
                         ->acceptedFiles('image/*'),
@@ -152,6 +161,8 @@ class ContactsListScreen extends Screen
             'contact.email' => $contact->email,
             'contact.phone_for_call' => $contact->phone_for_call,
             'contact.phone_for_chat' => $contact->phone_for_chat,
+            'contact.gtm_head' => $contact->gtm_head,
+            'contact.gtm_body' => $contact->gtm_body,
 //            'contact.copyright' => $contact->getTranslations('copyright'),
             'attachment' => $contact->attachments->pluck('id')->toArray(),
         ];
@@ -176,6 +187,8 @@ class ContactsListScreen extends Screen
         $contact->email = $data['email'];
         $contact->phone_for_call = $data['phone_for_call'];
         $contact->phone_for_chat = $data['phone_for_chat'];
+        $contact->gtm_head = $data['gtm_head'];
+        $contact->gtm_body = $data['gtm_body'];
         $contact->setTranslations('copyright', $data['copyright'] ?? []);
         $contact->save();
 
@@ -191,6 +204,8 @@ class ContactsListScreen extends Screen
         $contact->email = $data['email'];
         $contact->phone_for_call = $data['phone_for_call'];
         $contact->phone_for_chat = $data['phone_for_chat'];
+        $contact->gtm_head = $data['gtm_head'];
+        $contact->gtm_body = $data['gtm_body'];
         $contact->save();
 
         $attachmentIds = $request->input('attachment', []);

@@ -8,7 +8,6 @@ use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
-use Orchid\Support\Color;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -22,8 +21,6 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
-
-        // ...
     }
 
     /**
@@ -36,82 +33,32 @@ class PlatformProvider extends OrchidServiceProvider
         return [
             Menu::make('Posts')
                 ->icon('list')
-                ->route('platform.posts.list')
+                ->route('pages_settings.posts.list')
                 ->title('Page settings'),
 
             Menu::make('Posts Content')
                 ->icon('windows')
-                ->route('platform.post_contents.list'),
+                ->route('pages_settings.post_contents.list'),
 
             Menu::make('Menus')
                 ->icon('text-center')
-                ->route('platform.menus.list'),
+                ->route('pages_settings.menus.list'),
 
             Menu::make('Contacts')
                 ->icon('info')
-                ->route('platform.contacts.list'),
+                ->route('pages_settings.contacts.list'),
 
-//            Menu::make('Menu')
-//                ->title('Menu')
-//                ->icon('bs.book')
-//                ->route('platform.menu')
+            Menu::make(__('Users'))
+                ->icon('bs.people')
+                ->route('platform.systems.users')
+                ->permission('platform.systems.users')
+                ->title(__('Access Controls')),
 
-
-//            Menu::make('Get Started')
-//                ->icon('bs.book')
-//                ->title('Navigation')
-//                ->route(config('platform.index')),
-//
-//            Menu::make('Sample Screen')
-//                ->icon('bs.collection')
-//                ->route('platform.example')
-//                ->badge(fn () => 6),
-//
-//            Menu::make('Form Elements')
-//                ->icon('bs.card-list')
-//                ->route('platform.example.fields')
-//                ->active('*/examples/form/*'),
-//
-//            Menu::make('Layouts Overview')
-//                ->icon('bs.window-sidebar')
-//                ->route('platform.example.layouts'),
-//
-//            Menu::make('Grid System')
-//                ->icon('bs.columns-gap')
-//                ->route('platform.example.grid'),
-//
-//            Menu::make('Charts')
-//                ->icon('bs.bar-chart')
-//                ->route('platform.example.charts'),
-//
-//            Menu::make('Cards')
-//                ->icon('bs.card-text')
-//                ->route('platform.example.cards')
-//                ->divider(),
-//
-//            Menu::make(__('Users'))
-//                ->icon('bs.people')
-//                ->route('platform.systems.users')
-//                ->permission('platform.systems.users')
-//                ->title(__('Access Controls')),
-//
-//            Menu::make(__('Roles'))
-//                ->icon('bs.shield')
-//                ->route('platform.systems.roles')
-//                ->permission('platform.systems.roles')
-//                ->divider(),
-//
-//            Menu::make('Documentation')
-//                ->title('Docs')
-//                ->icon('bs.box-arrow-up-right')
-//                ->url('https://orchid.software/en/docs')
-//                ->target('_blank'),
-//
-//            Menu::make('Changelog')
-//                ->icon('bs.box-arrow-up-right')
-//                ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
-//                ->target('_blank')
-//                ->badge(fn () => Dashboard::version(), Color::DARK),
+            Menu::make(__('Roles'))
+                ->icon('bs.shield')
+                ->route('platform.systems.roles')
+                ->permission('platform.systems.roles')
+                ->divider(),
         ];
     }
 

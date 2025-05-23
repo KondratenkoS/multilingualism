@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
-use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
@@ -63,48 +62,46 @@ class ContactsListScreen extends Screen
                     }),
             ]),
 
-            Layout::modal('createContact', Layout::rows([
-                Select::make('lang')
-                    ->title('Language')
-                    ->options([
-                        'en' => 'English',
-                        'uk' => 'Українська',
-                        'fr' => 'French',
-                        'sp' => 'Spanish',
-                    ]),
+            Layout::modal('createContact', [
+                Layout::rows([
+                    Input::make('contact.id')->type('hidden'),
+                    Input::make('contact.email')->type('email')->title('Email'),
+                    Input::make('contact.phone_for_call')
+                        ->title('Phone for calls')
+                        ->type('text')
+                        ->mask([
+                            'mask' => '+99 999 999 99 99',
+                        ]),
+                    Input::make('contact.phone_for_chat')
+                        ->title('Phone for chats')
+                        ->type('text')
+                        ->mask([
+                            'mask' => '+99 999 999 99 99',
+                        ]),
 
-                Input::make('copyright')
-                    ->title('Copyright')
-                    ->type('text'),
+                    Quill::make('contact.gtm_head')
+                        ->title('"GTM" Head'),
+                    Quill::make('contact.gtm_body')
+                        ->title('"GTM" Body'),
 
-                Input::make('email')
-                    ->title('Email')
-                    ->type('text'),
+                    Upload::make('attachment')
+                        ->title('Logo upload')
+                        ->acceptedFiles('image/*'),
+                ]),
 
-                Input::make('phone_for_call')
-                    ->title('Phone for calls')
-                    ->type('text')
-                    ->mask([
-                        'mask' => '+99 999 999 99 99',
-                    ]),
-
-                Input::make('phone_for_chat')
-                    ->title('Phone for chats')
-                    ->type('text')
-                    ->mask([
-                        'mask' => '+99 999 999 99 99',
-                    ]),
-
-                Quill::make('contact.gtm_head')
-                    ->title('GTM Head'),
-
-                Quill::make('contact.gtm_body')
-                    ->title('GTM Body'),
-
-                Upload::make('attachment')
-                    ->title('Logo download')
-                    ->acceptedFiles('image/*'),
-            ]))->title('Create page')->applyButton('Create'),
+                Layout::tabs(
+                    collect(config('app.locales', ['en' => 'English']))
+                        ->mapWithKeys(function ($label, $locale) {
+                            return [
+                                $label => Layout::rows([
+                                    Input::make("contact.copyright.$locale")
+                                        ->title("Copyright ($label)")
+                                        ->type('text'),
+                                ]),
+                            ];
+                        })->toArray()
+                ),
+            ])->title('Create contacts')->applyButton('Create')->async('asyncGetContact'),
 
             Layout::modal('update', [
                 Layout::rows([
@@ -134,17 +131,18 @@ class ContactsListScreen extends Screen
                 ]),
 
                 Layout::tabs(
-                    collect(config('app.locales', ['en']))->mapWithKeys(function ($locale) {
-                        return [
-                            strtoupper($locale) => Layout::rows([
-                                Input::make("contact.copyright.$locale")
-                                    ->title("Copyright ($locale)")
-                                    ->type('text'),
-                            ]),
-                        ];
-                    })->toArray()
+                    collect(config('app.locales', ['en' => 'English']))
+                        ->mapWithKeys(function ($label, $locale) {
+                            return [
+                                $label => Layout::rows([
+                                    Input::make("contact.copyright.$locale")
+                                        ->title("Copyright ($label)")
+                                        ->type('text'),
+                                ]),
+                            ];
+                        })->toArray()
                 ),
-            ])->title('Edit page translation')->async('asyncGetContact'),
+            ])->title('Edit contacts')->applyButton('Edit')->async('asyncGetContact'),
 
             Layout::modal('delete', Layout::rows([
                 Input::make('contact.id')->type('hidden'),
@@ -163,52 +161,44 @@ class ContactsListScreen extends Screen
             'contact.phone_for_chat' => $contact->phone_for_chat,
             'contact.gtm_head' => $contact->gtm_head,
             'contact.gtm_body' => $contact->gtm_body,
-//            'contact.copyright' => $contact->getTranslations('copyright'),
             'attachment' => $contact->attachments->pluck('id')->toArray(),
         ];
 
-        foreach (config('app.locales', ['en']) as $locale) {
-            $data["contact.copyright.$locale"] = $contact->getTranslation('copyright', $locale, false);
+        foreach ($contact->getTranslations('copyright') as $locale => $value) {
+            $data["contact.copyright.$locale"] = $value;
         }
 
         return $data;
     }
 
-    public function delete(Request $request)
-    {
-        Contact::find($request->input('contact.id'))->delete();
-    }
-
     public function update(Request $request): void
     {
         $data = $request->input('contact');
-//        dd($request->input('contact'));
         $contact = Contact::findOrFail($data['id']);
-        $contact->email = $data['email'];
-        $contact->phone_for_call = $data['phone_for_call'];
-        $contact->phone_for_chat = $data['phone_for_chat'];
-        $contact->gtm_head = $data['gtm_head'];
-        $contact->gtm_body = $data['gtm_body'];
-        $contact->setTranslations('copyright', $data['copyright'] ?? []);
-        $contact->save();
-
-        $attachmentIds = $request->input('attachment', []);
-        $contact->attachments()->sync($attachmentIds);
+        $this->createOrSave($contact, $data, $request->input('attachment', []));
     }
 
     public function createContact(Request $request, Contact $contact): void
     {
-        $data = $request->all();
-//        dd($data);
-        $contact->setTranslation('copyright', $data['lang'], $data['copyright']);
+        $data = $request->input('contact');
+        $this->createOrSave($contact, $data, $request->input('attachment', []));
+    }
+
+    private function createOrSave(Contact $contact, array $data, array $attachments): void
+    {
         $contact->email = $data['email'];
         $contact->phone_for_call = $data['phone_for_call'];
         $contact->phone_for_chat = $data['phone_for_chat'];
-        $contact->gtm_head = $data['gtm_head'];
-        $contact->gtm_body = $data['gtm_body'];
-        $contact->save();
+        $contact->gtm_head = $data['gtm_head'] ?? null;
+        $contact->gtm_body = $data['gtm_body'] ?? null;
+        $contact->setTranslations('copyright', $data['copyright'] ?? []);
 
-        $attachmentIds = $request->input('attachment', []);
-        $contact->attachments()->sync($attachmentIds);
+        $contact->save();
+        $contact->attachments()->sync($attachments);
+    }
+
+    public function delete(Request $request): void
+    {
+        Contact::find($request->input('contact.id'))->delete();
     }
 }

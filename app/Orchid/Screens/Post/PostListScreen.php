@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
-use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
@@ -63,39 +62,39 @@ class PostListScreen extends Screen
                     }),
             ]),
 
-            Layout::modal('createPost', Layout::rows([
-                Select::make('lang')
-                    ->title('Language')
-                    ->options([
-                        'en' => 'English',
-                        'uk' => 'Українська',
-                        'fr' => 'French',
-                        'sp' => 'Spanish',
-                    ]),
 
-                Input::make('title')
-                    ->title('Title')
-                    ->type('text'),
+            Layout::modal('createPost', [
+                Layout::rows([
+                    Input::make('post.slug')->title('Slug')->type('text'),
+                ]),
 
-                Quill::make('body')
-                    ->title('Body'),
+                Layout::tabs(
+                    collect(config('app.locales', ['en' => 'English']))->mapWithKeys(function ($label, $locale) {
+                        return [
+                            $label => Layout::rows([
+                                Input::make("post.title.$locale")
+                                    ->title("Title ($label)")
+                                    ->type('text'),
 
-                Input::make('slug')
-                    ->title('Slug')
-                    ->type('text'),
+                                Quill::make("post.body.$locale")
+                                    ->title("Body ($label)"),
 
-                Input::make('meta_title')
-                    ->title('Meta tag for "title"')
-                    ->type('text'),
+                                Input::make("post.meta_title.$locale")
+                                    ->title("Meta tag for title ($label)")
+                                    ->type('text'),
 
-                Input::make('meta_description')
-                    ->title('Meta tag for "description"')
-                    ->type('text'),
+                                Input::make("post.meta_description.$locale")
+                                    ->title("Meta tag for description ($label)")
+                                    ->type('text'),
 
-                Input::make('meta_keywords')
-                    ->title('Meta tag for "keywords"')
-                    ->type('text'),
-            ]))->title('Create page')->applyButton('Create'),
+                                Input::make("post.meta_keywords.$locale")
+                                    ->title("Meta tag for keywords ($label)")
+                                    ->type('text'),
+                            ]),
+                        ];
+                    })->toArray()
+                ),
+            ])->title('Create page')->applyButton('Create')->async('asyncGetPost'),
 
             Layout::modal('update', [
                 Layout::rows([
@@ -104,32 +103,32 @@ class PostListScreen extends Screen
                 ]),
 
                 Layout::tabs(
-                    collect(config('app.locales', ['en']))->mapWithKeys(function ($locale) {
+                    collect(config('app.locales', ['en' => 'English']))->mapWithKeys(function ($label, $locale) {
                         return [
-                            strtoupper($locale) => Layout::rows([
+                            $label => Layout::rows([
                                 Input::make("post.title.$locale")
-                                    ->title("Title ($locale)")
+                                    ->title("Title ($label)")
                                     ->type('text'),
 
                                 Quill::make("post.body.$locale")
-                                    ->title("Body ($locale)"),
+                                    ->title("Body ($label)"),
 
                                 Input::make("post.meta_title.$locale")
-                                    ->title("Meta tag for title ($locale)")
+                                    ->title("Meta tag for title ($label)")
                                     ->type('text'),
 
                                 Input::make("post.meta_description.$locale")
-                                    ->title("Meta tag for description ($locale)")
+                                    ->title("Meta tag for description ($label)")
                                     ->type('text'),
 
                                 Input::make("post.meta_keywords.$locale")
-                                    ->title("Meta tag for keywords ($locale)")
+                                    ->title("Meta tag for keywords ($label)")
                                     ->type('text'),
                             ]),
                         ];
                     })->toArray()
                 ),
-            ])->title('Edit page translation')->async('asyncGetPost'),
+            ])->title('Edit page translation')->applyButton('Edit')->async('asyncGetPost'),
 
             Layout::modal('delete', Layout::rows([
                 Input::make('post.id')->type('hidden'),
@@ -142,38 +141,45 @@ class PostListScreen extends Screen
     public function asyncGetPost(Post $post): array
     {
         return [
-            'post' =>
-                [
-                    'id' => $post->id,
-                    'title' => $post->getTranslations('title'),
-                    'body' => $post->getTranslations('body'),
-                    'meta_title' => $post->getTranslations('meta_title'),
-                    'meta_description' => $post->getTranslations('meta_description'),
-                    'meta_keywords' => $post->getTranslations('meta_keywords'),
-                    'slug' => $post->slug,
-                ],
+            'post' => [
+                'id' => $post->id,
+                'title' => $post->getTranslations('title'),
+                'body' => $post->getTranslations('body'),
+                'meta_title' => $post->getTranslations('meta_title'),
+                'meta_description' => $post->getTranslations('meta_description'),
+                'meta_keywords' => $post->getTranslations('meta_keywords'),
+                'slug' => $post->slug,
+            ],
         ];
-    }
 
-    public function delete(Request $request)
-    {
-        Post::find($request->input('post.id'))->delete();
     }
 
     public function update(Request $request): void
     {
-        Post::find($request->input('post.id'))->update($request->post);
+        $data = $request->input('post');
+        $post = Post::findOrFail($data['id']);
+        $this->createOrSave($post, $data);
     }
 
     public function createPost(Request $request, Post $post): void
     {
-        $data = $request->all();
-        $post->setTranslation('title', $data['lang'], $data['title']);
-        $post->setTranslation('body', $data['lang'], $data['body']);
-        $post->setTranslation('meta_title', $data['lang'], $data['meta_title']);
-        $post->setTranslation('meta_description', $data['lang'], $data['meta_description']);
-        $post->setTranslation('meta_keywords', $data['lang'], $data['meta_keywords']);
-        $post->slug = $data['slug'];
+        $data = $request->input('post');
+        $this->createOrSave($post, $data);
+    }
+
+    private function createOrSave(Post $post, array $data): void
+    {
+        $post->slug = $data['slug'] ?? $post->slug;
+
+        foreach (['title', 'body', 'meta_title', 'meta_description', 'meta_keywords'] as $field) {
+            $post->setTranslations($field, $data[$field] ?? []);
+        }
+
         $post->save();
+    }
+
+    public function delete(Request $request): void
+    {
+        Post::find($request->input('post.id'))->delete();
     }
 }

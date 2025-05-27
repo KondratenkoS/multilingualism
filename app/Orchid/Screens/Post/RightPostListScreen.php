@@ -2,7 +2,8 @@
 
 namespace App\Orchid\Screens\Post;
 
-use App\Models\Post;
+use App\Models\LeftPost;
+use App\Models\RightPosts;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
@@ -11,18 +12,18 @@ use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 
-class PostListScreen extends Screen
+class RightPostListScreen extends Screen
 {
     public function query(): iterable
     {
         return [
-            'posts' => Post::all(),
+            'posts' => RightPosts::all(),
         ];
     }
 
     public function name(): ?string
     {
-        return 'Pages list';
+        return 'Right side posts';
     }
 
     public function commandBar(): iterable
@@ -39,10 +40,9 @@ class PostListScreen extends Screen
         return [
             Layout::table('posts', [
                 TD::make('id', 'ID'),
-                TD::make('title.en', 'Page title'),
-                TD::make('slug', 'Page slug'),
+                TD::make('title.en', 'Post title'),
                 TD::make('edit', 'Edit')
-                    ->render(function (Post $post) {
+                    ->render(function (RightPosts $post) {
                         return
                             ModalToggle::make('Edit')
                             ->modal('update')
@@ -52,7 +52,7 @@ class PostListScreen extends Screen
                             ]);
                     }),
                 TD::make('delete', 'Delete')
-                    ->render(function (Post $post) {
+                    ->render(function (RightPosts $post) {
                         return ModalToggle::make('Delete')
                             ->modal('delete')
                             ->method('delete')
@@ -64,10 +64,6 @@ class PostListScreen extends Screen
 
 
             Layout::modal('createPost', [
-                Layout::rows([
-                    Input::make('post.slug')->title('Slug')->type('text'),
-                ]),
-
                 Layout::tabs(
                     collect(config('app.locales', ['en' => 'English']))->mapWithKeys(function ($label, $locale) {
                         return [
@@ -78,18 +74,6 @@ class PostListScreen extends Screen
 
                                 Quill::make("post.body.$locale")
                                     ->title("Body ($label)"),
-
-                                Input::make("post.meta_title.$locale")
-                                    ->title("Meta tag for title ($label)")
-                                    ->type('text'),
-
-                                Input::make("post.meta_description.$locale")
-                                    ->title("Meta tag for description ($label)")
-                                    ->type('text'),
-
-                                Input::make("post.meta_keywords.$locale")
-                                    ->title("Meta tag for keywords ($label)")
-                                    ->type('text'),
                             ]),
                         ];
                     })->toArray()
@@ -99,9 +83,7 @@ class PostListScreen extends Screen
             Layout::modal('update', [
                 Layout::rows([
                     Input::make('post.id')->type('hidden'),
-                    Input::make('post.slug')->title('Slug')->type('text'),
                 ]),
-
                 Layout::tabs(
                     collect(config('app.locales', ['en' => 'English']))->mapWithKeys(function ($label, $locale) {
                         return [
@@ -112,18 +94,6 @@ class PostListScreen extends Screen
 
                                 Quill::make("post.body.$locale")
                                     ->title("Body ($label)"),
-
-                                Input::make("post.meta_title.$locale")
-                                    ->title("Meta tag for title ($label)")
-                                    ->type('text'),
-
-                                Input::make("post.meta_description.$locale")
-                                    ->title("Meta tag for description ($label)")
-                                    ->type('text'),
-
-                                Input::make("post.meta_keywords.$locale")
-                                    ->title("Meta tag for keywords ($label)")
-                                    ->type('text'),
                             ]),
                         ];
                     })->toArray()
@@ -138,17 +108,13 @@ class PostListScreen extends Screen
 
     }
 
-    public function asyncGetPost(Post $post): array
+    public function asyncGetPost(RightPosts $post): array
     {
         return [
             'post' => [
                 'id' => $post->id,
                 'title' => $post->getTranslations('title'),
                 'body' => $post->getTranslations('body'),
-                'meta_title' => $post->getTranslations('meta_title'),
-                'meta_description' => $post->getTranslations('meta_description'),
-                'meta_keywords' => $post->getTranslations('meta_keywords'),
-                'slug' => $post->slug,
             ],
         ];
 
@@ -157,21 +123,19 @@ class PostListScreen extends Screen
     public function update(Request $request): void
     {
         $data = $request->input('post');
-        $post = Post::findOrFail($data['id']);
+        $post = RightPosts::findOrFail($data['id']);
         $this->createOrSave($post, $data);
     }
 
-    public function createPost(Request $request, Post $post): void
+    public function createPost(Request $request, RightPosts $post): void
     {
         $data = $request->input('post');
         $this->createOrSave($post, $data);
     }
 
-    private function createOrSave(Post $post, array $data): void
+    private function createOrSave(RightPosts $post, array $data): void
     {
-        $post->slug = $data['slug'] ?? $post->slug;
-
-        foreach (['title', 'body', 'meta_title', 'meta_description', 'meta_keywords'] as $field) {
+        foreach (['title', 'body'] as $field) {
             $post->setTranslations($field, $data[$field] ?? []);
         }
 
@@ -180,6 +144,6 @@ class PostListScreen extends Screen
 
     public function delete(Request $request): void
     {
-        Post::find($request->input('post.id'))->delete();
+        RightPosts::find($request->input('post.id'))->delete();
     }
 }

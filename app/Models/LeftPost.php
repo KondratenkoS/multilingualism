@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Screen\AsSource;
 use Spatie\Translatable\HasTranslations;
 
-class Post extends Model
+class LeftPost extends Model
 {
     use HasTranslations, AsSource;
 
-    protected $table = 'posts';
+    protected $table = 'left_posts';
     protected $fillable = ['title', 'slug', 'body', 'meta_title', 'meta_description', 'meta_keywords'];
     public $translatable = ['title', 'body', 'meta_title', 'meta_description', 'meta_keywords'];
 

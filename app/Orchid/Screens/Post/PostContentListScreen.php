@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\Post;
 
-use App\Models\Post;
+use App\Models\LeftPost;
 use App\Models\PostContent;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;
@@ -69,7 +69,7 @@ class PostContentListScreen extends Screen
                     Input::make('postContent.slug')->title('Slug')->type('text'),
                     Select::make('postContent.post_id')
                         ->title('Main page')
-                        ->options(Post::all()->mapWithKeys(fn ($post) => [
+                        ->options(LeftPost::all()->mapWithKeys(fn ($post) => [
                             $post->id => $post->getTranslation('title', 'en')
                         ])->toArray()),
                 ]),
@@ -109,7 +109,7 @@ class PostContentListScreen extends Screen
                     Input::make('postContent.slug')->title('Slug')->type('text'),
                     Select::make('postContent.post_id')
                         ->title('Main page')
-                        ->options(Post::all()->mapWithKeys(fn ($post) => [
+                        ->options(LeftPost::all()->mapWithKeys(fn ($post) => [
                             $post->id => $post->getTranslation('title', 'en')
                         ])->toArray()),
                 ]),

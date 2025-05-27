@@ -31,10 +31,18 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            Menu::make('Posts')
+            Menu::make('Left side posts')
                 ->icon('list')
-                ->route('pages_settings.posts.list')
+                ->route('pages_settings.left_posts.list')
                 ->title('Page settings'),
+
+            Menu::make('Right side posts')
+                ->icon('list')
+                ->route('pages_settings.right_posts.list'),
+
+            Menu::make('Intro Posts')
+                ->icon('list')
+                ->route('pages_settings.intro_posts.list'),
 
             Menu::make('Posts Content')
                 ->icon('windows')

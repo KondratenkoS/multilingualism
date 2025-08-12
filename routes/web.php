@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\AboutMeController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', MenuController::class)->name('main.index');
 
 Route::get('lang/{locale}', function ($locale) {
     if (!array_key_exists($locale, config('app.locales'))) {
@@ -17,3 +16,5 @@ Route::get('lang/{locale}', function ($locale) {
 })->name('lang.switch');
 
 
+Route::get('/', IndexController::class)->name('main.index');
+Route::get('/about-me', AboutMeController::class)->name('about-me');

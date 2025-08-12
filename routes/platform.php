@@ -3,11 +3,10 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\Post\ContactsListScreen;
-use App\Orchid\Screens\Post\IntroPostListScreen;
-use App\Orchid\Screens\Post\MenuListScreen;
-use App\Orchid\Screens\Post\PostContentListScreen;
-use App\Orchid\Screens\Post\LeftPostListScreen;
+use App\Orchid\Screens\Post\MenuItemsListScreen;
+use App\Orchid\Screens\Post\PagesListScreen;
+use App\Orchid\Screens\Post\PostsListScreen;
+use App\Orchid\Screens\Post\SettingsListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -22,12 +21,10 @@ Route::screen('/', PlatformScreen::class)
 
 // Page settings
 Route::prefix('/')->name('pages_settings.')->group(function () {
-    Route::screen('intro_posts', IntroPostListScreen::class)->name('intro_posts.list');
-    Route::screen('left_posts', LeftPostListScreen::class)->name('left_posts.list');
-    Route::screen('right_posts', \App\Orchid\Screens\Post\RightPostListScreen::class)->name('right_posts.list');
-    Route::screen('post_contents', PostContentListScreen::class)->name('post_contents.list');
-    Route::screen('menus', MenuListScreen::class)->name('menus.list');
-    Route::screen('contacts', ContactsListScreen::class)->name('contacts.list');
+    Route::screen('settings', SettingsListScreen::class)->name('settings.list');
+    Route::screen('menu_items', MenuItemsListScreen::class)->name('menu_items.list');
+    Route::screen('pages', PagesListScreen::class)->name('pages.list');
+    Route::screen('posts', PostsListScreen::class)->name('posts.list');
 });
 
 // Platform > Profile

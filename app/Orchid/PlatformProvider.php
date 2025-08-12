@@ -31,30 +31,22 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            Menu::make('Left side posts')
+            Menu::make('Settings')
+            ->icon('gear')
+            ->route('pages_settings.settings.list')
+            ->title('Settings'),
+
+            Menu::make('Menu Items')
                 ->icon('list')
-                ->route('pages_settings.left_posts.list')
-                ->title('Page settings'),
+                ->route('pages_settings.menu_items.list'),
 
-            Menu::make('Right side posts')
-                ->icon('list')
-                ->route('pages_settings.right_posts.list'),
+            Menu::make('Pages')
+                ->icon('book')
+                ->route('pages_settings.pages.list'),
 
-            Menu::make('Intro Posts')
-                ->icon('list')
-                ->route('pages_settings.intro_posts.list'),
-
-            Menu::make('Posts Content')
-                ->icon('windows')
-                ->route('pages_settings.post_contents.list'),
-
-            Menu::make('Menus')
-                ->icon('text-center')
-                ->route('pages_settings.menus.list'),
-
-            Menu::make('Contacts')
-                ->icon('info')
-                ->route('pages_settings.contacts.list'),
+            Menu::make('Posts')
+                ->icon('postcard')
+                ->route('pages_settings.posts.list'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')

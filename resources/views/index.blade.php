@@ -1,8 +1,8 @@
 <html data-bs-theme="dark" class="dark-theme">
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="{{ $leftPosts[0]->meta_keywords }}">
-    <meta name="description" content="{{ $leftPosts[0]->meta_description }}">
+    <meta name="keywords" content="{{ $settings->meta_keywords }}">
+    <meta name="description" content="{{ $settings->meta_description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="canonical" href="http://shulgin.care.myshelter.synology.me/">
     <meta name="robots" content="index, follow">
@@ -10,7 +10,7 @@
           href="http://shulgin.care.myshelter.synology.me/wp-content/uploads/2024/10/logo-irina-shulgin.svg">
 
 
-    <title>{{ $leftPosts[0]->meta_title }}</title>
+    <title>{{ $settings->meta_title }}</title>
 
 
     <!-- Additional CSS -->
@@ -443,7 +443,6 @@
 <!-- Main container -->
 <div class="page-container">
 
-
     <!-- navbar -->
     <div class="bloc l-bloc none full-width-bloc" id="navbar">
         <div class="container bloc-no-padding-lg bloc-no-padding">
@@ -596,122 +595,17 @@
                     </div>
                 </div>
             </div>
-            <div class="row d-grid mb-5 offcanvas" id="product-menu">
-                <div class="col text-start">
-                    <div class="d-inline-flex align-items-center  btn rounded-pill text-start lt-p-btn"
-                         onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/';">
-                        <div class=" " id="icon-svg">
-
-                        </div>
-                        <h5 class="mb-lg-0 z-3 mb-0">
-                            Что такое Натуропатия? </h5>
-                    </div>
-                </div>
-                <div class="col text-start">
-                    <div class="d-inline-flex align-items-center  btn rounded-pill text-start lt-p-btn"
-                         onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/aromaterapiya-i-aromapsikhologiya/';">
-                        <div class=" " id="icon-svg">
-                            <div class="icon_svg-wrapper" style="width: var(--icon-size); height: var(--icon-size);">
-                                <!--?xml version="1.0" encoding="UTF-8"?-->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="currentColor"
-                                     viewBox="0 0 24 25">
-                                    <path fill-rule="evenodd"
-                                          d="m12.462.607-.45.893-.465-.885.455-.24.46.232Zm7.876 10.346c.018-.21.026-.422.023-.635-.043-3.04-2.178-5.5-4.052-7.1A21.824 21.824 0 0 0 12.49.621l-.02-.01-.006-.003-.002-.001s-.001-.001-.45.892l-.466-.885h-.002l-.002.002-.008.004-.024.013a8.176 8.176 0 0 0-.376.215c-.25.148-.6.367-1.019.655a21.568 21.568 0 0 0-3.07 2.557C4.82 6.305 2.5 9.714 2.5 14.183c0 4.012 3.45 9.317 9.476 9.317 2.994 0 5.373-1.315 6.99-3.008 1.461-1.53 2.367-3.44 2.504-5.08l.03-.032v-.407c0-1.484-.333-2.684-.939-3.68a6.054 6.054 0 0 0-.223-.34ZM18.12 8.919c-.714-.46-1.498-.862-2.247-1.246l-.365-.188c-.928-.479-1.807-.955-2.6-1.553L12.2 5.4l-.614.637c-.5.519-1.15 1.28-1.644 2.209-.495.928-.866 2.082-.71 3.349v.002c.422 3.399 3.36 4.815 5.475 4.815 2.04 0 3.706-1.076 4.688-2.635.047.246.08.512.095.8l-.002.002v.407c0 1.094-.642 2.737-1.968 4.125-1.297 1.358-3.175 2.389-5.544 2.389-4.704 0-7.476-4.178-7.476-7.317 0-3.736 1.936-6.668 3.966-8.714a19.572 19.572 0 0 1 3.56-2.822 19.84 19.84 0 0 1 2.983 2.09c1.376 1.176 2.607 2.61 3.11 4.182Zm.099 2.612c-.437 1.676-1.832 2.881-3.512 2.881-1.413 0-3.227-.942-3.49-3.061-.09-.728.115-1.461.49-2.164.22-.412.487-.793.757-1.127.711.46 1.44.848 2.126 1.202l.38.196c.806.413 1.531.786 2.18 1.216.407.27.764.55 1.069.857Z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <h5 class="mb-lg-0 z-3 mb-0">
-                            Ароматерапия и аромапсихология </h5>
-                    </div>
-                </div>
-                <div class="col text-start">
-                    <div class="d-inline-flex align-items-center  btn rounded-pill text-start lt-p-btn"
-                         onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/fitoterapiya/';">
-                        <div class=" " id="icon-svg">
-                            <div class="icon_svg-wrapper" style="width: var(--icon-size); height: var(--icon-size);">
-                                <!--?xml version="1.0" encoding="UTF-8"?-->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                     viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                          d="m13 13.5.006 3.983c1.88-.069 3.242-.336 4.24-.774 1.124-.492 1.825-1.218 2.296-2.25.492-1.078.746-2.522.863-4.457.1-1.655.099-3.582.096-5.845V4.02c-3.888.164-5.609 1.3-6.461 2.69-.49.799-.76 1.78-.899 2.948C13.001 10.83 13 12.112 13 13.5Zm-1.991 5.973.005 3.529 2-.003-.005-3.515c2.052-.07 3.714-.361 5.041-.943 1.584-.695 2.64-1.782 3.311-3.25.649-1.422.92-3.166 1.04-5.168.105-1.722.103-3.722.1-5.978L22.5 3V2h-1c-4.901 0-7.712 1.295-9.165 3.665a7.699 7.699 0 0 0-.845 1.992C10.089 5.957 7.53 4.5 3 4.5H2v1c0 .34-.004.705-.01 1.087-.01.965-.024 2.04.03 3.104.074 1.5.283 3.09.846 4.545.57 1.473 1.509 2.817 3.028 3.78 1.312.832 2.992 1.339 5.115 1.457Zm-.003-2.004c-1.806-.115-3.102-.546-4.041-1.142-1.093-.693-1.788-1.66-2.234-2.813-.453-1.17-.644-2.517-.714-3.923-.05-.999-.038-1.97-.027-2.912l.002-.152c3.57.2 5.263 1.474 6.09 2.574a4.8 4.8 0 0 1 .82 1.706 4.044 4.044 0 0 1 .11.678.63.63 0 0 1 .002.024c0 .001 0 .002 0 0m0 0v-.005h.003C11 12.157 11 12.816 11 13.465l.006 4.003"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <h5 class="mb-lg-0 z-3 mb-0">
-                            Фитотерапия </h5>
-                    </div>
-                </div>
-                <div class="col text-start">
-                    <div class="d-inline-flex align-items-center  btn rounded-pill text-start lt-p-btn"
-                         onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/lechebnoe-pitanie-i-pishhevye-dobavki/';">
-                        <div class=" " id="icon-svg">
-                            <div class="icon_svg-wrapper" style="width: var(--icon-size); height: var(--icon-size);">
-                                <!--?xml version="1.0" encoding="UTF-8"?-->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="currentColor"
-                                     viewBox="0 0 24 25">
-                                    <path fill-rule="evenodd"
-                                          d="M1.195 2.896A7.159 7.159 0 0 1 6.97 0c2.75 0 5.159 1.54 6.338 3.803h.017a21.493 21.493 0 0 1 2.704.205c.797.113 1.684.29 2.516.576.82.281 1.658.691 2.292 1.308 1.167 1.137 1.703 2.551 1.95 3.948.236 1.333.22 2.726.206 3.923l-.001.12-.003.283c-.011 1.15-.024 2.472-.26 3.735-.258 1.389-.798 2.794-1.96 3.935-1.162 1.14-2.603 1.666-4.02 1.916-1.315.231-2.689.238-3.88.243l-.236.001-.22.001c-1.196.008-2.58.016-3.903-.204-1.421-.237-2.87-.75-4.035-1.886-1.167-1.137-1.703-2.552-1.95-3.948-.236-1.333-.22-2.726-.207-3.923l.002-.115v-2.167l1.062.067c.406.025 2.446.08 3.588.08 2.842 0 5.107-2.244 5.107-4.95 0-.371-.043-.733-.123-1.082-.57.062-1.14.161-1.748.268l-.023.004c-.98.171-2.056.36-3.227.36-2.381 0-4.348-.749-5.719-2.364l-.511-.604.469-.637Zm9.85 1.074c-.393.058-.774.125-1.142.19l-.041.007c-1.007.176-1.925.333-2.906.333-1.546 0-2.714-.375-3.582-1.064A5.176 5.176 0 0 1 6.97 2c1.673 0 3.147.778 4.075 1.97Zm2.94 1.853c.474.023 1.096.07 1.763.165.723.102 1.476.257 2.148.488.682.234 1.21.522 1.545.849.77.75 1.175 1.723 1.377 2.864.203 1.146.189 2.376.175 3.627v.045l-.004.25c-.012 1.188-.024 2.34-.226 3.424-.212 1.138-.62 2.113-1.395 2.873-.775.76-1.784 1.166-2.967 1.374-1.14.201-2.355.207-3.586.213l-.193.001-.173.001c-1.237.007-2.462.014-3.61-.177-1.188-.198-2.197-.594-2.968-1.346-.77-.75-1.175-1.723-1.377-2.864-.203-1.146-.189-2.376-.175-3.627v-.127c.829.023 1.922.045 2.65.045 3.898 0 7.108-3.09 7.108-6.95 0-.385-.032-.761-.093-1.128Z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <h5 class="mb-lg-0 z-3 mb-0">
-                            Лечебное питание и&nbsp;пищевые&nbsp;добавки </h5>
-                    </div>
-                </div>
-                <div class="col text-start">
-                    <div class="d-inline-flex align-items-center  btn rounded-pill text-start lt-p-btn"
-                         onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/iridodiagnostika/';">
-                        <div class=" " id="icon-svg">
-                            <div class="icon_svg-wrapper" style="width: var(--icon-size); height: var(--icon-size);">
-                                <!--?xml version="1.0" encoding="UTF-8"?-->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                     viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                          d="M2 2h9.994C17.517 2 22 6.479 22 12v10h-6.459c-3.757-.004-6.241-1.666-7.752-3.781a10.09 10.09 0 0 1-.715-1.16 9.799 9.799 0 0 1-1.34-.8C3.618 14.751 2 12.26 2 8.454V2Zm8.297 16.076c.614.099 1.194.142 1.71.142a6.217 6.217 0 1 0 0-12.436A6.217 6.217 0 0 0 5.784 12c0 .544.055 1.17.178 1.836C4.823 12.67 4 10.96 4 8.455V4h7.994C16.414 4 20 7.585 20 12v8h-4.446c-2.401 0-4.083-.802-5.257-1.924Zm-1.738-2.543c-.554-1.274-.774-2.577-.774-3.533a4.217 4.217 0 0 1 4.221-4.218 4.217 4.217 0 1 1 0 8.436 9.497 9.497 0 0 1-3.447-.685Z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <h5 class="mb-lg-0 z-3 mb-0">
-                            Иридодиагностика </h5>
-                    </div>
-                </div>
-                <div class="col text-start">
-                    <div class="d-inline-flex align-items-center  btn rounded-pill text-start lt-p-btn"
-                         onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/psihoanaliz-zabolevaniy/';">
-                        <div class=" " id="icon-svg">
-                            <div class="icon_svg-wrapper" style="width: var(--icon-size); height: var(--icon-size);">
-                                <!--?xml version="1.0" encoding="UTF-8"?-->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                     viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                          d="M12.073 4.006h-.037l-.23.003c-1.169.011-2.317.023-3.398.219-1.133.205-2.098.6-2.84 1.343-.745.744-1.142 1.704-1.349 2.831-.203 1.109-.21 2.295-.215 3.51v.118l-.002.153c-.006 1.204-.012 2.381.178 3.482.195 1.128.584 2.087 1.325 2.827.74.74 1.706 1.133 2.839 1.33 1.137.197 2.356.184 3.583.172h.037l.23-.003c1.169-.011 2.317-.023 3.397-.219 1.133-.205 2.099-.6 2.841-1.343.745-.744 1.142-1.704 1.349-2.831.203-1.109.209-2.295.215-3.51v-.118l.001-.153c.007-1.204.013-2.381-.177-3.482-.195-1.128-.584-2.087-1.325-2.827-.74-.74-1.706-1.133-2.839-1.33-1.138-.197-2.356-.184-3.583-.172Zm3.925-1.798c1.378.24 2.782.756 3.911 1.885 1.13 1.13 1.644 2.526 1.882 3.902.221 1.28.213 2.62.207 3.781l-.001.204-.001.176c-.006 1.168-.012 2.515-.248 3.803-.251 1.37-.776 2.76-1.902 3.885-1.128 1.127-2.525 1.647-3.897 1.896-1.256.228-2.568.24-3.701.25a188.903 188.903 0 0 0-.374.004c-1.175.013-2.552.027-3.872-.202-1.378-.239-2.782-.756-3.911-1.885-1.13-1.13-1.644-2.526-1.882-3.902-.221-1.28-.214-2.62-.207-3.781l.001-.204.001-.176c.006-1.168.012-2.515.248-3.803.251-1.37.776-2.76 1.902-3.885C5.28 3.03 6.679 2.51 8.05 2.26c1.256-.228 2.568-.24 3.701-.25l.263-.003.111-.001c1.175-.013 2.552-.027 3.872.202Z"
-                                          clip-rule="evenodd"></path>
-                                    <path fill-rule="evenodd"
-                                          d="M11.4 10.21c-.078.25-.204.551-.437.783-.232.23-.533.356-.782.433a5.36 5.36 0 0 1-.85.174c-.41.056-.885.091-1.34.125l-.526.041c-.632.053-1.151.12-1.502.233l-.003.002.005.001c.352.115.871.182 1.504.236l.537.042c.451.034.923.07 1.329.124.292.039.585.092.847.172.248.076.549.2.781.431.233.232.358.533.435.781.082.262.136.557.177.85.056.407.094.88.13 1.334l.045.54c.057.637.127 1.161.243 1.516l.006.018.006-.016c.116-.354.185-.877.241-1.514.015-.169.03-.347.044-.529.036-.457.074-.934.131-1.346.041-.293.096-.589.178-.852.078-.249.205-.55.438-.782.232-.23.532-.356.782-.433.263-.081.557-.135.85-.174.41-.056.885-.091 1.34-.125l.526-.041c.632-.053 1.151-.12 1.502-.233L18.04 12l-.006-.002c-.35-.115-.87-.182-1.503-.235a49.479 49.479 0 0 0-.537-.043c-.452-.034-.923-.07-1.329-.124a5.386 5.386 0 0 1-.847-.172c-.248-.076-.55-.2-.781-.431-.233-.232-.358-.533-.435-.78a5.43 5.43 0 0 1-.177-.85 24.287 24.287 0 0 1-.13-1.335l-.045-.54c-.057-.637-.127-1.16-.244-1.516L12 5.954a.586.586 0 0 0-.005.016c-.116.354-.185.877-.241 1.514-.015.17-.03.347-.044.529-.036.457-.074.934-.131 1.346a5.41 5.41 0 0 1-.179.852Zm-.388-5.516a1.319 1.319 0 0 1 1.976 0c.22.24.354.537.443.808.178.54.257 1.227.313 1.852l.05.606c.035.432.067.834.117 1.197.036.257.077.46.123.61a.898.898 0 0 0 .063.16c.02.01.068.034.16.063.15.046.351.085.608.12.36.048.76.078 1.189.11.195.015.396.03.603.048.622.053 1.306.128 1.844.304.27.089.567.222.806.44a1.32 1.32 0 0 1 0 1.975c-.24.22-.536.352-.806.44-.537.175-1.22.25-1.84.302-.203.017-.4.032-.592.046a20.84 20.84 0 0 0-1.2.111 3.926 3.926 0 0 0-.607.121.858.858 0 0 0-.165.065.87.87 0 0 0-.066.165 3.96 3.96 0 0 0-.124.611c-.05.365-.083.77-.118 1.207-.015.192-.03.39-.049.594-.055.624-.133 1.31-.31 1.85-.09.27-.223.567-.442.807a1.319 1.319 0 0 1-1.977 0c-.219-.24-.353-.537-.442-.808-.178-.54-.257-1.226-.313-1.852-.018-.208-.035-.41-.05-.606-.035-.432-.067-.834-.117-1.196a3.987 3.987 0 0 0-.123-.61.893.893 0 0 0-.064-.161.88.88 0 0 0-.16-.063 3.948 3.948 0 0 0-.607-.12c-.36-.048-.76-.078-1.19-.11-.194-.015-.396-.03-.603-.048-.621-.053-1.305-.128-1.843-.304-.27-.088-.567-.221-.806-.44a1.318 1.318 0 0 1 0-1.975c.239-.22.536-.352.806-.44.537-.175 1.22-.25 1.84-.302.203-.017.4-.031.592-.046a20.76 20.76 0 0 0 1.2-.111c.256-.035.458-.075.607-.12a.864.864 0 0 0 .165-.066.87.87 0 0 0 .066-.165c.047-.15.088-.353.124-.61.05-.366.083-.772.117-1.208.016-.192.031-.39.05-.594.055-.624.133-1.31.31-1.85.09-.27.223-.567.442-.807Z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <h5 class="mb-lg-0 z-3 mb-0">
-                            Психоанализ заболеваний </h5>
-                    </div>
-                </div>
-            </div>
             <div class="row d-grid mt-5" id="service-menu-offcanvas">
                 <div class="col text-start">
                     <div class="d-flex flex-column">
-                        @foreach($menus as $menu)
+{{--                        @foreach($settings as $setting)--}}
                             <div class="d-inline-flex align-items-center  btn rounded-pill lt-p-btn"
                                  onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/';">
                                 <h5 class="mb-lg-0 z-3 mb-0">
-                                    {{ $menu->title }}
+                                    {{ $settings->menu_items }}
                                 </h5>
                             </div>
-                        @endforeach
+{{--                        @endforeach--}}
                     </div>
                 </div>
             </div>
@@ -722,7 +616,7 @@
                             <div class=" rounded-pill d-inline-flex align-items-center lt-p-btn btn"
                                  onclick="location.href='mailto:info@shulgin.life?subject=Консультация по вопросам здоровья';">
                                 <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
-                                    {{ $contacts->email }}
+                                    {{ $settings->email }}
                                 </h5>
                             </div>
                         </div>
@@ -731,7 +625,7 @@
                         <div class="col text-start">
                             <div class=" rounded-pill d-inline-flex align-items-center lt-p-btn">
                                 <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
-                                    {{ $contacts->phone_for_chat }}        </h5>
+                                    {{ $settings->phone_for_call }}        </h5>
                                 <div class=" d-inline-flex hz">
                                     <div class=" " id="contact-icon-1">
                                         <div class="contact-icon-wrapper"
@@ -753,7 +647,7 @@
                         <div class="col text-start">
                             <div class=" rounded-pill d-inline-flex align-items-center lt-p-btn">
                                 <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
-                                    {{ $contacts->phone_for_chat }}        </h5>
+                                    {{ $settings->phone_for_chat }}        </h5>
                                 <div class=" d-inline-flex hz">
                                     <div class=" " id="contact-icon-1">
                                         <div class="contact-icon-wrapper"
@@ -817,7 +711,7 @@
                         <div class="  lt-ml-125 pe-lg-5 pe-2">
                             <footer>
                                 <p style="font-size: 0.75em; font-line-height: 0.85em;">
-                                    &copy; {{ date('Y') }} - {{ $contacts->copyright }}
+                                    &copy; {{ date('Y') }} - {{ $settings->copyright }}
                                 </p>
                             </footer>
 
@@ -827,16 +721,15 @@
                 <div class="col-lg-1" id="language-menu">
                     <div class="row g-0 mt-md-2 mt-sm-2 mt-2 mt-lg-5">
                         <div class="col text-start d-inline-flex">
-                            <div class="flex gap-4 p-4">
-                                @foreach($languages as $key => $label)
-                                    <a href="{{ route('lang.switch', $key) }}"
-                                       class="inline-flex items-center px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium">
-                                        {{ $label }}
-                                    </a>
-                                @endforeach
-
-                                <p class="text-sm text-gray-600">Поточна мова: <span class="font-semibold">{{ app()->getLocale() }}</span></p>
-                            </div>
+                            @foreach($languages as $key => $label)
+                                <a href="{{ route('lang.switch', $key) }}" class="text-decoration-none text-reset hover:text-reset focus:text-reset active:text-reset">
+                                    <div class="d-inline-flex align-items-center btn rounded-pill lt-p-btn">
+                                        <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
+                                            {{ $label }}
+                                        </h5>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -947,11 +840,11 @@
                                 class=" d-grid lt-welcome-01 bg-body-tertiary bg-opacity-10 lt-bg-blur-32 rounded-5 p-5">
                                 <div class="mx-3 mt-2 mb-2">
                                     <h2 class="mb-0 mb-4 text-color-dark-welcome-01">
-                                        {{ $introPosts[0]->intro_title }}
+{{--                                        {{ $introPosts[0]->intro_title }}--}}
                                     </h2>
                                     <h5 class="mb-0 mb-lg-0 text-color-dark-welcome-01">
                                         <p class="h5 mb-3"><em>
-                                                {{ strip_tags($introPosts[0]->intro_post) }}
+{{--                                                {{ strip_tags($introPosts[0]->intro_post) }}--}}
                                             </em></p>
                                         <p class="h5 mb-3"></p>
                                     </h5>
@@ -976,18 +869,18 @@
                             <div class="row d-grid my-4 mx-3">
                                 <div class="col-12">
                                     <h2 class="mb-lg-2 mb-2">
-                                        {{ $introPosts[0]->left_intro_title }}
+{{--                                        {{ $introPosts[0]->left_intro_title }}--}}
                                     </h2>
                                     <p class="mb-0 text-secondary">
                                     </p>
                                     <p>
-                                        {{ strip_tags($introPosts[0]->left_intro_post) }}
+{{--                                        {{ strip_tags($introPosts[0]->left_intro_post) }}--}}
                                     </p>
                                     <p></p>
                                 </div>
                             </div>
                             <div class="row mb-2 mx-3">
-                                @foreach($leftPosts as $leftPost)
+{{--                                @foreach($leftPosts as $leftPost)--}}
                                     <div class="d-grid col-12">
                                         <div class="row">
                                             <div class="col">
@@ -996,13 +889,13 @@
                                             </div>
                                         </div>
                                         <h4 class="mb-lg-2 mb-2">
-                                            {{ $leftPost->title }}
+{{--                                            {{ $leftPost->title }}--}}
                                         </h4>
                                         <p class="mb-lg-1 mb-1 text-secondary">
-                                            {{ strip_tags($leftPost->body) }}
+{{--                                            {{ strip_tags($leftPost->body) }}--}}
                                         </p>
                                     </div>
-                                @endforeach
+{{--                                @endforeach--}}
 
                             </div>
                             <div class="row">
@@ -1026,16 +919,16 @@
                             <div class="row mb-3 mb-lg-3 d-grid my-4 mx-3">
                                 <div class="text-start col-lg-12 col-12 col">
                                     <h2 class="mb-sm-0 mb-lg-2 mb-2">
-                                        {{ $introPosts[0]->right_intro_title }}
+{{--                                        {{ $introPosts[0]->right_intro_title }}--}}
                                     </h2>
                                     <p class="mb-lg-0 mb-0 text-secondary">
-                                        {{ strip_tags($introPosts[0]->right_intro_post) }}
+{{--                                        {{ strip_tags($introPosts[0]->right_intro_post) }}--}}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="row mb-2 mx-3">
-                                @foreach($rightPosts as $rightPost)
+{{--                                @foreach($rightPosts as $rightPost)--}}
                                     <div class="col-lg-12 col-12 ">
                                         <div class="row">
                                             <div class="col">
@@ -1058,12 +951,12 @@
                                                     </div>
                                                 </div>
                                                 <h4 class="mb-sm-0 mb-lg-0 mb-0">
-                                                    {{ $rightPost->title }}
+{{--                                                    {{ $rightPost->title }}--}}
                                                 </h4>
                                             </div>
                                         </div>
                                         <p class="mb-lg-2 mb-2 mb-sm-0 text-secondary mb-md-2">
-                                            {{ strip_tags($rightPost->body) }}
+{{--                                            {{ strip_tags($rightPost->body) }}--}}
                                         </p>
                                         <div class="row">
                                             <div class="col text-lg-end text-end">
@@ -1077,7 +970,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+{{--                                @endforeach--}}
 
                             </div>
                         </div>
@@ -1110,14 +1003,21 @@
                 <div class="col-lg-6 mb-5">
                     <div class="row d-grid" id="contact-menu-footer">
                         <div class="col text-end d-flex flex-column align-items-baseline">
-                            @foreach($menus as $menu)
-                                <div class="btn rounded-pill lt-p-btn w-auto"
-                                     onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/';">
-                                    <h5 class="mb-lg-0 z-3 mb-0">
-                                        {{ $menu->title }}
-                                    </h5>
-                                </div>
-                            @endforeach
+{{--                            @foreach($menus as $menu)--}}
+                                <a href="#" class="text-decoration-none text-reset hover:text-reset focus:text-reset active:text-reset">
+                                    <div class="d-inline-flex align-items-center btn rounded-pill lt-p-btn">
+                                        <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
+                                            {{ strip_tags($settings->menu_items) }}
+                                        </h5>
+                                    </div>
+                                </a>
+{{--                                <div class="btn rounded-pill lt-p-btn w-auto"--}}
+{{--                                     onclick="window.location.href='http://shulgin.care.myshelter.synology.me/naturopatiya/';">--}}
+{{--                                    <h5 class="mb-lg-0 z-3 mb-0">--}}
+{{--                                        {{ $menu->title }}--}}
+{{--                                    </h5>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
                         </div>
                     </div>
                 </div>
@@ -1129,7 +1029,7 @@
                                     <div class=" rounded-pill d-inline-flex align-items-center lt-p-btn btn"
                                          onclick="location.href='mailto:info@shulgin.life?subject=Консультация по вопросам здоровья';">
                                         <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
-                                            {{ $contacts->email }}
+                                            {{ $settings->email }}
                                         </h5>
                                     </div>
                                 </div>
@@ -1138,7 +1038,7 @@
                                 <div class="col text-start">
                                     <div class=" rounded-pill d-inline-flex align-items-center lt-p-btn">
                                         <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
-                                            {{ $contacts->phone_for_call }}        </h5>
+                                            {{ $settings->phone_for_call }}        </h5>
                                         <div class=" d-inline-flex">
                                             <div class=" " id="contact-icon-1">
                                                 <div class="contact-icon-wrapper"
@@ -1160,7 +1060,7 @@
                                 <div class="col text-start">
                                     <div class=" rounded-pill d-inline-flex align-items-center lt-p-btn">
                                         <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
-                                            {{ $contacts->phone_for_chat }}        </h5>
+                                            {{ $settings->phone_for_chat }}        </h5>
                                         <div class=" d-inline-flex">
                                             <div class=" " id="contact-icon-1">
                                                 <div class="contact-icon-wrapper"
@@ -1224,7 +1124,7 @@
                                 <div class="  lt-ml-125 pe-lg-5 pe-2">
                                     <footer>
                                         <p style="font-size: 0.75em; font-line-height: 0.85em; color: var(--bs-primary-color);">
-                                            &copy; {{ date('Y') }} - {{ $contacts->copyright }}
+                                            &copy; {{ date('Y') }} - {{ $settings->copyright }}
                                         </p>
                                     </footer>
                                 </div>
@@ -1235,26 +1135,15 @@
                 <div class="col-lg-1 mb-5" id="language-footer">
                     <div class="row d-grid g-0">
                         <div class="col text-start flex-lg-column flex-row d-lg-flex-inline">
-                            <div class="flex gap-4 p-4">
-                                @foreach($languages as $key => $label)
-                                    <a href="{{ route('lang.switch', $key) }}"
-                                       class="inline-flex items-center px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium">
-                                        {{ $label }}
-                                    </a>
-                                @endforeach
-
-                                <p class="text-sm text-gray-600">Поточна мова: <span class="font-semibold">{{ app()->getLocale() }}</span></p>
-                            </div>
-
-
-                            {{--                            @foreach($languages as $language)--}}
-{{--                                <div class=" d-inline-flex align-items-center btn rounded-pill lt-p-btn"--}}
-{{--                                     onclick="location.href='mailto:info@shulgin.life?subject=Консультация по вопросам здоровья';">--}}
-{{--                                    <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">--}}
-{{--                                        {{ $language }}--}}
-{{--                                    </h5>--}}
-{{--                                </div>--}}
-{{--                            @endforeach--}}
+                            @foreach($languages as $key => $label)
+                                <a href="{{ route('lang.switch', $key) }}" class="text-decoration-none text-reset hover:text-reset focus:text-reset active:text-reset">
+                                    <div class="d-inline-flex align-items-center btn rounded-pill lt-p-btn">
+                                        <h5 class="z-3 mb-md-0 mb-0 mb-lg-0">
+                                            {{ $label }}
+                                        </h5>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
